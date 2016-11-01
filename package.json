@@ -1,0 +1,24 @@
+{
+  "name": "gulp-basics",
+  "version": "1.0.0",
+  "description": "\"Basic gulp examples\"",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anoopmundathan/gulp-basics.git"
+  },
+  "keywords": [
+    "gulp"
+  ],
+  "author": "anoopmundathan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anoopmundathan/gulp-basics/issues"
+  },
+  "homepage": "https://github.com/anoopmundathan/gulp-basics#readme"
+}
