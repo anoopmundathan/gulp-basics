@@ -1,20 +1,17 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');
 
 gulp.task('scripts', function() {
-  gulp.src('./js/*.js')
-    .pipe(concat('all.js'))
-    .pipe(gulp.dest('./dist/'));
+  gulp.src('js/*.js')
+    .pipe(concat('final.js'))
+    .pipe(gulp.dest('dist/'))
+    .pipe(rename('final-min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('task1', function() {
-  console.log('gulp task1 completed');
-});
-
-gulp.task('task2', function() {
-  console.log('gulp task2 completed');
-});
-
-gulp.task('default', ['task1','task2','scripts'], function() {
+gulp.task('default', ['scripts'], function() {
   console.log('all tasks completed');
 });
