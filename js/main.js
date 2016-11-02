@@ -4,3 +4,4 @@ function helloWorld(username) {
   }
 }
 var displayName = helloWorld('Jack');
+displayName();
