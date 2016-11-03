@@ -4,6 +4,7 @@ Basic gulp examples - showing usage of below gulp plugins
 - [gulp-uglify](https://www.npmjs.com/package/gulp-uglify)
 - [gulp-rename](https://www.npmjs.com/package/gulp-rename)
 - [gulp-sass](https://www.npmjs.com/package/gulp-sass)
+- [gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps)
 
 ## Getting Started
 ### Setup

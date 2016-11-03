@@ -3,32 +3,35 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var sass = require('gulp-sass');
+var maps = require('gulp-sourcemaps');
 
-// Path
-var destJSPath = 'dist/js';
-var destCSSPath = 'dist/css';
-
-// This gulp task will do the following
-// 1. concatinate js files and create final.js in dist folder
-// 2. rename final.js to final-min.js
-// 3. uglify the js file
-gulp.task('scripts', function() {
+// 1. Concatinate js files and create final.js in dist folder
+gulp.task('concat', function() {
   gulp.src('js/*.js')
-    .pipe(concat('final.js'))
-    .pipe(gulp.dest(destJSPath))
-    .pipe(rename('final-min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest(destJSPath));
+    .pipe(maps.init())
+    .pipe(concat('app.js'))
+    .pipe(maps.write('./'))
+    .pipe(gulp.dest('js'));
 });
 
-// Compile sass file into css
+// 2. Minify js files
+gulp.task('uglify', function() {
+  gulp.src('js/app.js')
+    .pipe(uglify())
+    .pipe(rename('app.min.js'))
+    .pipe(gulp.dest('js'));
+});
+
+// 3. Compile sass file into css
 gulp.task('sass', function() {
   gulp.src('scss/*.scss')
+    .pipe(maps.init())
     .pipe(sass())
-    .pipe(gulp.dest(destCSSPath));
+    .pipe(maps.write('/'))
+    .pipe(gulp.dest('./css'));
 });
 
 // Default gulp task
-gulp.task('default', ['scripts','sass'], function() {
+gulp.task('default', ['concat','uglify','sass'], function() {
   console.log('All gulp tasks are completed');
 });
