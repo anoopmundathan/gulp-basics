@@ -16,7 +16,7 @@ gulp.task('concat', function() {
 
 // 2. Minify js files
 gulp.task('uglify', ['concat'], function() {
-  return gulp.src('js/app.js')
+  gulp.src('js/app.js')
     .pipe(uglify())
     .pipe(rename('app.min.js'))
     .pipe(gulp.dest('js'));
@@ -24,15 +24,20 @@ gulp.task('uglify', ['concat'], function() {
 
 // 3. Compile sass file into css
 gulp.task('sass', function() {
-  return gulp.src('scss/*.scss')
+  gulp.src('scss/*.scss')
     .pipe(maps.init())
     .pipe(sass())
     .pipe(maps.write('/'))
     .pipe(gulp.dest('./css'));
 });
 
-gulp.task('build', [' uglify', 'sass'], function() {
+// Watch task
+gulp.task('watchSass', function() {
+  gulp.watch('scss/*.scss', ['sass']);
 });
+
+// Build task
+gulp.task('build', ['uglify', 'sass']);
 
 // Default gulp task
 gulp.task('default',['build']);
