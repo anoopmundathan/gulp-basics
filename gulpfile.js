@@ -7,7 +7,7 @@ var maps = require('gulp-sourcemaps');
 
 // 1. Concatinate js files and create final.js in dist folder
 gulp.task('concat', function() {
-  gulp.src('js/*.js')
+  return gulp.src('js/*.js')
     .pipe(maps.init())
     .pipe(concat('app.js'))
     .pipe(maps.write('./'))
@@ -15,8 +15,8 @@ gulp.task('concat', function() {
 });
 
 // 2. Minify js files
-gulp.task('uglify', function() {
-  gulp.src('js/app.js')
+gulp.task('uglify', ['concat'], function() {
+  return gulp.src('js/app.js')
     .pipe(uglify())
     .pipe(rename('app.min.js'))
     .pipe(gulp.dest('js'));
@@ -24,14 +24,15 @@ gulp.task('uglify', function() {
 
 // 3. Compile sass file into css
 gulp.task('sass', function() {
-  gulp.src('scss/*.scss')
+  return gulp.src('scss/*.scss')
     .pipe(maps.init())
     .pipe(sass())
     .pipe(maps.write('/'))
     .pipe(gulp.dest('./css'));
 });
 
-// Default gulp task
-gulp.task('default', ['concat','uglify','sass'], function() {
-  console.log('All gulp tasks are completed');
+gulp.task('build', [' uglify', 'sass'], function() {
 });
+
+// Default gulp task
+gulp.task('default',['build']);
